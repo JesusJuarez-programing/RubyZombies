@@ -1,0 +1,62 @@
+<style>
+img{
+  max-width:  90%;
+}
+td{
+  width: 30px;
+}
+table{
+  vertical-align: center;
+}
+</style>
+
+<h1><center>Zombies</center></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Avatar</th>
+      <th>Nombre</th>
+      <th>Bio</th>
+      <th>Edad</th>
+      <th>Email</th>
+      <th>Dueño</th>
+      <th>Podrido</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @zombies.each do |zombie| %>
+        <td><%= image_tag(zombie.avatar_url) if zombie.avatar? %></td>
+        <td><%= zombie.name %></td>
+        <td><%= zombie.bio %></td>
+        <td><%= zombie.age %></td>
+        <td><%= zombie.email %></td>
+        <td><%= zombie.admin_id ? Admin.find(zombie.admin_id).email : "No tiene"  %></td>
+          <!-- Nos aparese si o no envez de true o false. -->
+        <td><%= zombie.rotten ? "Si. :)" : "No. :(" %></td>
+        <td><center><%= link_to '<button type="button" class="button primary small">Mostrar</button>'.html_safe, zombie %></center></td>
+       
+        
+          <% if current_admin.role != "Subscriptor" %>
+           <td><center><%= link_to '<button type="button" class="button success small">Editar</button>'.html_safe, edit_zombie_path(zombie) %></center></td>
+          </td>
+          <% end %>
+          <% if current_admin.role != "Contribuidor" &&  current_admin.role != "Subscriptor" %>
+          <td><%= link_to '<button type="button" class="button alert small">Eliminar!</button>'.html_safe, zombie, method: :delete, data: { confirm: '¿Estas seguro?' } %>
+          </td>
+          <% end %>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+
+
+<br>
+<br>
+<% if current_admin.role == "Suscriptor" %>
+<center><%= link_to '<button type="button" class="button warning basci expanded">Nuevo Zombie</button>'.html_safe, new_zombie_path %></center>
+<% end %>

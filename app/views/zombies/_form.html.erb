@@ -1,0 +1,64 @@
+<%= form_for(@zombie, html: {multipart:true}) do |f| %>
+  <% if zombie.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(zombie.errors.count, "error") %> prohibited this zombie from being saved:</h2>
+
+      <ul>
+      <% zombie.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="row">
+  <div class="medium-6 columns">
+  <div class="field">
+    <%= f.label :Nombre %>
+    <%= f.text_field :name %>
+  </div>
+  </div>
+  <div class="medium-6 columns">
+  <div class="field">
+    <%= f.label :Biblografia %>
+    <%= f.text_area :bio %>
+  </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="medium-6 columns">
+<div class="field">
+    <%= f.label :Edad %>
+    <%= f.number_field :age %>
+  </div>
+</div>
+  <div class="medium-6 columns">
+  <div>
+    <%= f.label :Email %>
+    <%= f.text_field :email %>
+</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="medium-6 columns">
+  <div>
+    <%=f.label :Podrido %>
+    <%= f.text_field :rotten %>
+</div>
+</div>
+  <div class="medium-6 columns">
+  <div>
+    <%=f.label :Avatar %>
+    <%= f.file_field :avatar %>
+</div>
+</div>
+</div>
+
+
+
+  <div class="actions">
+    <%= f.submit %>
+    </div>
+<% end %>

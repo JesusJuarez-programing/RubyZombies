@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+<body>
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <% if admin_signed_in? %>
+        <ul class ="dropdown menu" data-dropdown-menu>
+          <li class="menu-text"><em><big>Aplicación de Zombies</big></em>
+            <ul class"menu">
+          <li>By GatomanJuarez</li>
+            </ul>
+          </li> 
+          <li class="menu-text">Zombies 
+            <ul class="menu">
+              <li><%= link_to "Inicio", zombies_path %></li>
+              <% if current_admin.role == "Suscriptor" %>
+              <li><%= link_to "Nuevo Zombie",new_zombie_path %></li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+      <% end %>  
+    </div>
+            
+            <div class="top-bar-right">
+            <ul class="menu">
+            
+            <% if admin_signed_in? %>
+              <li>Bienvenido(a) <%= current_admin.email %></li>
+              <li> <%= link_to "Editar perfil", edit_admin_registration_path %></li>
+              <li> <%= link_to "Cerrar sesión", destroy_admin_session_path, method: :delete%></li>
+            <% else %>
+              <% if owner_signed_in? || admin_signed_in? %>
+              <% else %>
+              <li><%= link_to "Ingresar Usuario", new_admin_session_path %></li>
+              <li><%= link_to "Registro Usuario", new_admin_registration_path %></li>
+              <% end %>
+              <% end %>
+
+            <% if owner_signed_in? %>
+              <li>Bienvenido(a) Administrador <%= current_owner.email %></li>
+              <li> <%= link_to "Editar perfil", edit_owner_registration_path %></li>
+              <li> <%= link_to "Cerrar sesión", destroy_owner_session_path, method: :delete%></li>
+            <% else %>
+              <% if owner_signed_in? || admin_signed_in? %>
+              <% else %>
+              <li><%= link_to "Administrador", new_owner_session_path %></li>
+              <li><%= link_to "Registro Administrador", new_owner_registration_path %></li>
+              <% end %>
+              <% end %>
+            
+            
+            </ul>
+                
+
+            </div>
+          </div>
+
+    <%= yield %>
+
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+  </body>
+</html>

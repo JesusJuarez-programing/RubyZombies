@@ -1,0 +1,38 @@
+<%= form_for(brain) do |f| %>
+  <% if brain.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(brain.errors.count, "error") %> prohibited this brain from being saved:</h2>
+
+      <ul>
+      <% brain.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="field">
+<%= f.collection_select :zombie_id,Zombie.order(:name),:id,:name,include_blank:true %>
+</div>
+
+  <div class="field">
+    <%= f.label :flavor %>
+    <%= f.text_field :flavor %>
+  </div>
+
+<!-- Agregamos iq y fresh -->
+
+ <div class="field">
+    <%= f.label :iq %>
+    <%= f.number_field :iq %>
+  </div>
+
+ <div class="field">
+    <%= f.label :fresh %>
+    <%= f.check_box :fresh %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

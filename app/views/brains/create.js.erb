@@ -1,0 +1,4 @@
+var new_brain = $("<%= escape_javascript(render(:partial => @brain))%>").hide();
+$('#brain').prepend(new_brain);
+$('#brain_<%= @brain.id %>').fadeln('slow');
+$('#new_brain')[0].reset();

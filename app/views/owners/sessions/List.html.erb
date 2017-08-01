@@ -1,0 +1,19 @@
+<table>
+  <thead>
+    <tr>
+    <th>Nombre</th>
+      <th>Alias</th>
+      <th>Email</th>
+      <th>Fecha de creacion</th>
+    </tr>
+  </thead>
+<tbody>
+   <% @admins.each do |user| %>
+     <td><%= user.nombre %></td>
+     <td><%= user.alias %></td>
+        <td><%= user.email %></td>
+        <td><%= user.created_at %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

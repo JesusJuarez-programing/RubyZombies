@@ -1,0 +1,95 @@
+<style>
+img{
+  max-width:  30%;
+  }
+</style>
+
+
+
+<center>
+<div class="row">
+  <div class="large-8 columns">
+  <%= image_tag(@zombie.avatar_url) if @zombie.avatar? %>
+  </div>
+  <div class="large-4 columns">
+  <p>
+  <strong>Nombre:</strong>
+  <%= @zombie.name %>
+</p>
+
+<p>
+  <strong>Biografia:</strong>
+  <%= @zombie.bio %>
+</p>
+
+<p>
+  <strong>Edad:</strong>
+  <%= @zombie.age %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @zombie.email %>
+</p>
+
+<p>
+  <strong>Podrido:</strong>
+  <%= @zombie.rotten ? "Si. :)" : "No. :(" %>
+</p>
+
+<p>
+  <strong>Creado por:</strong>
+  <%= Admin.find(@zombie.admin_id).email %>
+</p>
+  </div>
+</div>
+ 
+
+
+
+
+<br><br><br>
+<%= link_to '<button type="button" class="button success basic">Editar</button>'.html_safe, edit_zombie_path(@zombie) %> |
+<%= link_to '<button type="button" class="button secondary basic">Regresar</button>'.html_safe, zombies_path %>
+
+
+<div id="brains">
+    <%= render :partial => @zombie.brains.reverse %>
+</div>
+
+<%= form_for([@zombie, Brain.new], remote:true) do |f| %>
+  
+
+<% if current_admin.role == "Subscriptor" %>
+          <p> No puede agregar cerebros. :(  </p>
+ 
+<% else %>
+<div class="field">
+    <%= f.label :Sabor %>
+    <%= f.text_field :flavor %>
+</div>
+
+
+
+<div class="field">
+    <%= f.label :IQ %>
+    <%= f.number_field :iq %>
+</div>
+
+<div class="field">
+    <%= f.label :Frescura %>
+    <%= f.check_box :fresh %>
+</div>
+
+
+
+<div class="actions">
+    <%= f.submit "Add brain" %>
+</div>
+<% end %>
+<% end %>
+
+</center>
+
+
+

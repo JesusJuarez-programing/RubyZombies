@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Flavor:</strong>
+  <%= @brain.flavor %>
+</p>
+<p>
+  <strong>Iq:</strong>
+  <%= @brain.iq %>
+</p>
+<p>
+  <strong>Fresh:</strong>
+  <%= @brain.fresh %>
+</p>
+
+<%= link_to 'Editar', edit_brain_path(@brain) %> |
+<%= link_to 'Volver', brains_path %>
