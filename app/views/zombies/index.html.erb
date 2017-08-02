@@ -43,7 +43,7 @@ table{
            <td><center><%= link_to '<button type="button" class="button success small">Editar</button>'.html_safe, edit_zombie_path(zombie) %></center></td>
           </td>
           <% end %>
-          <% if current_admin.role != "Contribuidor" &&  current_admin.role != "Subscriptor" %>
+          <% if current_admin.role == "Editor"%>
           <td><%= link_to '<button type="button" class="button alert small">Eliminar!</button>'.html_safe, zombie, method: :delete, data: { confirm: '¿Estas seguro?' } %>
           </td>
           <% end %>
@@ -57,6 +57,6 @@ table{
 
 <br>
 <br>
-<% if current_admin.role == "Suscriptor" %>
+<% if current_admin.role != "Subscriptor" %>
 <center><%= link_to '<button type="button" class="button warning basci expanded">Nuevo Zombie</button>'.html_safe, new_zombie_path %></center>
 <% end %>

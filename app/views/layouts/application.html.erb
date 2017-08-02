@@ -24,7 +24,7 @@
           <li class="menu-text">Zombies 
             <ul class="menu">
               <li><%= link_to "Inicio", zombies_path %></li>
-              <% if current_admin.role == "Suscriptor" %>
+              <% if current_admin.role != "Subscriptor" %>
               <li><%= link_to "Nuevo Zombie",new_zombie_path %></li>
               <% end %>
             </ul>

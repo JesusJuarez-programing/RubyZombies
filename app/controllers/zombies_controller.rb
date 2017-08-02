@@ -9,7 +9,7 @@ class ZombiesController < ApplicationController
       role = current_admin.role
       if role == "Contribuidor"
         @zombies = Zombie.where('admin_id = ?', current_admin.id)  
-      elsif role == "Subscriptor"
+      elsif role == "Suscriptor"
         @zombies = Zombie.where('admin_id = ?', current_admin.id) 
       else  
         @zombies = Zombie.all
