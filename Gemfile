@@ -44,7 +44,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 
 #carrier wave
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 # Use Capistrano for deployment
 gem 'record_tag_helper', '~> 1.0'
 # gem 'capistrano-rails', group: :development
